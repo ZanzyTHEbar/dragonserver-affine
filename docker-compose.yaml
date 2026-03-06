@@ -2,7 +2,7 @@ name: affine
 
 services:
   affine:
-    image: ghcr.io/toeverything/affine@${AFFINE_IMAGE_DIGEST:-sha256:638893c8f62bb7fd0b3028863096f2b057e3c7ca2ac5163574c333698a331f33}
+    image: ghcr.io/toeverything/affine@latest
     depends_on:
       redis:
         condition: service_healthy
@@ -19,9 +19,9 @@ services:
       DATABASE_URL: postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE:-affine}
       AFFINE_INDEXER_ENABLED: "true"
       AFFINE_INDEXER_SEARCH_ENDPOINT: http://indexer:9308
-      AFFINE_SERVER_HOST: ${AFFINE_SERVER_HOST:?docs.zacariahheim.com}
+      AFFINE_SERVER_HOST: ${AFFINE_SERVER_HOST}
       AFFINE_SERVER_HTTPS: ${AFFINE_SERVER_HTTPS:-true}
-      AFFINE_SERVER_EXTERNAL_URL: ${AFFINE_SERVER_EXTERNAL_URL:?https://docs.zacariahheim.com}
+      AFFINE_SERVER_EXTERNAL_URL: ${AFFINE_SERVER_EXTERNAL_URL}
       AFFINE_SERVER_SUB_PATH: ${AFFINE_SERVER_SUB_PATH:-}
       MAILER_HOST: ${MAILER_HOST:-smtp.gmail.com}
       MAILER_PORT: ${MAILER_PORT:-587}
@@ -31,19 +31,6 @@ services:
       MAILER_IGNORE_TLS: ${MAILER_IGNORE_TLS:-false}
     expose:
       - "3010"
-    labels:
-      traefik.enable: "true"
-      traefik.http.middlewares.affine-https-redirect.redirectscheme.scheme: https
-      traefik.http.routers.affine-http.entryPoints: http
-      traefik.http.routers.affine-http.middlewares: affine-https-redirect
-      traefik.http.routers.affine-http.rule: Host(`docs.zacariahheim.com`) && PathPrefix(`/`)
-      traefik.http.routers.affine-http.service: affine-service
-      traefik.http.routers.affine-https.entryPoints: https
-      traefik.http.routers.affine-https.rule: Host(`docs.zacariahheim.com`) && PathPrefix(`/`)
-      traefik.http.routers.affine-https.service: affine-service
-      traefik.http.routers.affine-https.tls: "true"
-      traefik.http.routers.affine-https.tls.certresolver: letsencrypt
-      traefik.http.services.affine-service.loadbalancer.server.port: "3010"
     volumes:
       - type: bind
         source: ./storage/uploads
@@ -73,9 +60,9 @@ services:
       DATABASE_URL: postgresql://${DB_USERNAME}:${DB_PASSWORD}@postgres:5432/${DB_DATABASE:-affine}
       AFFINE_INDEXER_ENABLED: "true"
       AFFINE_INDEXER_SEARCH_ENDPOINT: http://indexer:9308
-      AFFINE_SERVER_HOST: ${AFFINE_SERVER_HOST:?docs.zacariahheim.com}
+      AFFINE_SERVER_HOST: ${AFFINE_SERVER_HOST}
       AFFINE_SERVER_HTTPS: ${AFFINE_SERVER_HTTPS:-true}
-      AFFINE_SERVER_EXTERNAL_URL: ${AFFINE_SERVER_EXTERNAL_URL:?https://docs.zacariahheim.com}
+      AFFINE_SERVER_EXTERNAL_URL: ${AFFINE_SERVER_EXTERNAL_URL}
       AFFINE_SERVER_SUB_PATH: ${AFFINE_SERVER_SUB_PATH:-}
       MAILER_HOST: ${MAILER_HOST:-smtp.gmail.com}
       MAILER_PORT: ${MAILER_PORT:-587}
@@ -105,8 +92,8 @@ services:
   postgres:
     image: pgvector/pgvector:${POSTGRES_VERSION:-pg16}
     environment:
-      POSTGRES_USER: ${DB_USERNAME:?}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:?}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_DATABASE:-affine}
       POSTGRES_INITDB_ARGS: --data-checksums
     healthcheck:
