@@ -9,6 +9,7 @@ This guide covers the most likely DragonServer deployment issues for AFFiNE on C
 **Fix:** Ensure the compose uses:
 
 - `exclude_from_hc: true` on `affine_migration`
+- `restart: "no"` on `affine_migration`
 - `depends_on.affine_migration.condition=service_completed_successfully` on `affine`
 
 If the migration job actually failed, inspect its logs in Coolify before retrying the deploy.

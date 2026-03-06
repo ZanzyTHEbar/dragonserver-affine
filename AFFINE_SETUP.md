@@ -23,7 +23,7 @@ Important Coolify-specific behavior:
 - The compose file is the single source of truth.
 - Only the `affine` service should get a public domain in Coolify.
 - Do not add manual Traefik labels.
-- `affine_migration` uses `exclude_from_hc: true` because it exits successfully after running once.
+- `affine_migration` uses `exclude_from_hc: true` and `restart: "no"` because it exits successfully after running once.
 
 ## Required Environment Variables
 

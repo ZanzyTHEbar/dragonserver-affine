@@ -45,6 +45,7 @@ services:
   affine_migration:
     image: ghcr.io/toeverything/affine@${AFFINE_IMAGE_DIGEST:-sha256:638893c8f62bb7fd0b3028863096f2b057e3c7ca2ac5163574c333698a331f33}
     exclude_from_hc: true
+    restart: "no"
     command: ["sh", "-c", "node ./scripts/self-host-predeploy.js"]
     depends_on:
       postgres:
