@@ -35,7 +35,6 @@ Copy [.env.example](.env.example) into your local operator environment and provi
 - `MANTICORE_VERSION=10.1.0`
 - `AFFINE_SERVER_HOST=docs.zacariahheim.com`
 - `AFFINE_SERVER_EXTERNAL_URL=https://docs.zacariahheim.com`
-- `AFFINE_PRIVATE_KEY=<generated-secret>`
 - `DB_PASSWORD=<generated-secret>`
 
 ### Persistent storage
@@ -50,6 +49,8 @@ Storage paths are:
 - `./storage/manticore`
 
 Keep those paths stable after initial deployment.
+
+`./storage/config` is especially important: AFFiNE writes its generated PEM private key there on first boot as `private.key`. Do not set `AFFINE_PRIVATE_KEY` to a random string in Coolify unless you are intentionally supplying a valid PEM private key.
 
 ### SMTP
 

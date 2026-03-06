@@ -99,3 +99,15 @@ Check in this order:
 3. indexer health
 4. Authentik provider/app/group state
 5. exact deployed env values
+
+## 9. `ERR_OSSL_UNSUPPORTED` when loading the private key
+
+This usually means `AFFINE_PRIVATE_KEY` was set to a random string instead of a PEM key.
+
+Fix:
+
+- remove `AFFINE_PRIVATE_KEY` from the deployed env
+- keep `./storage/config` mounted persistently
+- redeploy so AFFiNE can use the generated `private.key` file in that config directory
+
+Only set `AFFINE_PRIVATE_KEY` manually if you are supplying a real PEM-formatted private key.
