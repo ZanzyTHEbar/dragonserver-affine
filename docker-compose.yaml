@@ -40,6 +40,29 @@ services:
         source: ./storage/config
         target: /root/.affine/config
         is_directory: true
+      - type: bind
+        source: ./storage/config/config.json
+        target: /root/.affine/config/config.json
+        content: |
+          {
+            "$schema": "https://github.com/toeverything/affine/releases/latest/download/config.schema.json",
+            "auth": {
+              "allowSignupForOauth": true
+            },
+            "oauth": {
+              "providers.oidc": {
+                "clientId": "${AFFINE_OIDC_CLIENT_ID:-}",
+                "clientSecret": "${AFFINE_OIDC_CLIENT_SECRET:-}",
+                "issuer": "${AFFINE_OIDC_ISSUER:-}",
+                "args": {
+                  "scope": "${AFFINE_OIDC_SCOPE:-openid profile email}",
+                  "claim_id": "${AFFINE_OIDC_CLAIM_ID:-preferred_username}",
+                  "claim_email": "${AFFINE_OIDC_CLAIM_EMAIL:-email}",
+                  "claim_name": "${AFFINE_OIDC_CLAIM_NAME:-name}"
+                }
+              }
+            }
+          }
     restart: unless-stopped
 
   affine_migration:
@@ -79,6 +102,29 @@ services:
         source: ./storage/config
         target: /root/.affine/config
         is_directory: true
+      - type: bind
+        source: ./storage/config/config.json
+        target: /root/.affine/config/config.json
+        content: |
+          {
+            "$schema": "https://github.com/toeverything/affine/releases/latest/download/config.schema.json",
+            "auth": {
+              "allowSignupForOauth": true
+            },
+            "oauth": {
+              "providers.oidc": {
+                "clientId": "${AFFINE_OIDC_CLIENT_ID:-}",
+                "clientSecret": "${AFFINE_OIDC_CLIENT_SECRET:-}",
+                "issuer": "${AFFINE_OIDC_ISSUER:-}",
+                "args": {
+                  "scope": "${AFFINE_OIDC_SCOPE:-openid profile email}",
+                  "claim_id": "${AFFINE_OIDC_CLAIM_ID:-preferred_username}",
+                  "claim_email": "${AFFINE_OIDC_CLAIM_EMAIL:-email}",
+                  "claim_name": "${AFFINE_OIDC_CLAIM_NAME:-name}"
+                }
+              }
+            }
+          }
 
   redis:
     image: redis:${REDIS_VERSION:-7.4-alpine}
