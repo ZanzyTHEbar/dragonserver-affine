@@ -6,7 +6,7 @@ This stack is based on the official AFFiNE self-hosted compose, with the server-
 
 ## Stack
 
-- **AFFiNE**: `ghcr.io/toeverything/affine:v0.26.3`
+- **AFFiNE**: `ghcr.io/toeverything/affine@sha256:638893c8f62bb7fd0b3028863096f2b057e3c7ca2ac5163574c333698a331f33`
 - **Migration job**: same AFFiNE image, one-shot predeploy job
 - **PostgreSQL**: `pgvector/pgvector:pg16`
 - **Redis**: `redis:7.4-alpine`
@@ -31,7 +31,7 @@ Copy [.env.example](.env.example) into your local operator environment and provi
 
 ### Critical values
 
-- `AFFINE_VERSION=v0.26.3`
+- `AFFINE_IMAGE_DIGEST=sha256:638893c8f62bb7fd0b3028863096f2b057e3c7ca2ac5163574c333698a331f33`
 - `MANTICORE_VERSION=10.1.0`
 - `AFFINE_SERVER_HOST=docs.zacariahheim.com`
 - `AFFINE_SERVER_EXTERNAL_URL=https://docs.zacariahheim.com`

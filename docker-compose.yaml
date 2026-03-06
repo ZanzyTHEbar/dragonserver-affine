@@ -2,7 +2,7 @@ name: affine
 
 services:
   affine:
-    image: ghcr.io/toeverything/affine:${AFFINE_VERSION:-v0.26.3}
+    image: ghcr.io/toeverything/affine@${AFFINE_IMAGE_DIGEST:-sha256:638893c8f62bb7fd0b3028863096f2b057e3c7ca2ac5163574c333698a331f33}
     depends_on:
       redis:
         condition: service_healthy
@@ -44,7 +44,7 @@ services:
     restart: unless-stopped
 
   affine_migration:
-    image: ghcr.io/toeverything/affine:${AFFINE_VERSION:-v0.26.3}
+    image: ghcr.io/toeverything/affine@${AFFINE_IMAGE_DIGEST:-sha256:638893c8f62bb7fd0b3028863096f2b057e3c7ca2ac5163574c333698a331f33}
     exclude_from_hc: true
     command: ["sh", "-c", "node ./scripts/self-host-predeploy.js"]
     depends_on:
