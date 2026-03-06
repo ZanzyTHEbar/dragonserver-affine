@@ -2,7 +2,7 @@ name: affine
 
 services:
   affine:
-    image: ghcr.io/toeverything/affine@latest
+    image: ghcr.io/toeverything/affine@stable
     depends_on:
       redis:
         condition: service_healthy
