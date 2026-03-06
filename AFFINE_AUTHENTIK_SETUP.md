@@ -43,7 +43,7 @@ Create:
 
 - `affine-users`
 
-Bind the AFFiNE application to `affine-users` so only approved users can complete login.
+Bind the AFFiNE application to an access policy that requires membership in `affine-users` so only approved users can complete login.
 
 ### Bundle inheritance
 
@@ -57,11 +57,12 @@ That keeps AFFiNE aligned with the existing standard-access bundle pattern alrea
 
 ## ORM Bootstrap Script
 
-Use [create_authentik_oidc.py](create_authentik_oidc.py) inside `ak shell` to create or update:
+Run [create_authentik_oidc.py](create_authentik_oidc.py) inside the Authentik server container to create or update:
 
 - the AFFiNE provider
 - the AFFiNE application
 - the `affine-users` group
+- the `affine-users-access` expression policy
 
 The script prints:
 

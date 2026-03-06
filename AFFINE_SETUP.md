@@ -40,12 +40,16 @@ Copy [.env.example](.env.example) into your local operator environment and provi
 
 ### Persistent storage
 
-- `DB_DATA_LOCATION`
-- `UPLOAD_LOCATION`
-- `CONFIG_LOCATION`
-- `MANTICORE_DATA_LOCATION`
+The compose intentionally uses fixed repo-relative bind mounts because Coolify's Docker Compose app parser rejects variable substitution in volume source paths.
 
-These paths must point to durable storage. Keep them stable after initial deployment.
+Storage paths are:
+
+- `./storage/postgres`
+- `./storage/uploads`
+- `./storage/config`
+- `./storage/manticore`
+
+Keep those paths stable after initial deployment.
 
 ### SMTP
 

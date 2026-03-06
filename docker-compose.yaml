@@ -34,11 +34,11 @@ services:
       - "3010"
     volumes:
       - type: bind
-        source: ${UPLOAD_LOCATION:?}
+        source: ./storage/uploads
         target: /root/.affine/storage
         is_directory: true
       - type: bind
-        source: ${CONFIG_LOCATION:?}
+        source: ./storage/config
         target: /root/.affine/config
         is_directory: true
     restart: unless-stopped
@@ -73,11 +73,11 @@ services:
       MAILER_IGNORE_TLS: ${MAILER_IGNORE_TLS:-false}
     volumes:
       - type: bind
-        source: ${UPLOAD_LOCATION:?}
+        source: ./storage/uploads
         target: /root/.affine/storage
         is_directory: true
       - type: bind
-        source: ${CONFIG_LOCATION:?}
+        source: ./storage/config
         target: /root/.affine/config
         is_directory: true
 
@@ -104,7 +104,7 @@ services:
       retries: 5
     volumes:
       - type: bind
-        source: ${DB_DATA_LOCATION:?}
+        source: ./storage/postgres
         target: /var/lib/postgresql/data
         is_directory: true
     restart: unless-stopped
@@ -126,7 +126,7 @@ services:
       retries: 5
     volumes:
       - type: bind
-        source: ${MANTICORE_DATA_LOCATION:?}
+        source: ./storage/manticore
         target: /var/lib/manticore
         is_directory: true
     restart: unless-stopped

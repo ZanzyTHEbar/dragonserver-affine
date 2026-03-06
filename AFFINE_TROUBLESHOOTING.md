@@ -76,10 +76,10 @@ For Gmail, use the app password already configured for Authentik rather than a n
 
 Confirm the Coolify env still points at the same persistent paths:
 
-- `DB_DATA_LOCATION`
-- `UPLOAD_LOCATION`
-- `CONFIG_LOCATION`
-- `MANTICORE_DATA_LOCATION`
+- `./storage/postgres`
+- `./storage/uploads`
+- `./storage/config`
+- `./storage/manticore`
 
 Do not casually change these after the stack is initialized.
 
