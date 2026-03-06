@@ -92,6 +92,7 @@ Common causes:
 - migration failed but only the app logs were checked
 - private key missing or changed unexpectedly
 - Authentik app/group configuration incomplete
+- proxy labels were not attached to the public `affine` service
 
 Check in this order:
 
@@ -100,6 +101,8 @@ Check in this order:
 3. indexer health
 4. Authentik provider/app/group state
 5. exact deployed env values
+
+If the app is healthy on its container IP but `https://docs.zacariahheim.com` still returns a proxy `404`, inspect the `affine` container labels and confirm the Traefik labels from `docker-compose.yaml` are present on the running container.
 
 ## 9. `ERR_OSSL_UNSUPPORTED` when loading the private key
 

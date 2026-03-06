@@ -31,6 +31,19 @@ services:
       MAILER_IGNORE_TLS: ${MAILER_IGNORE_TLS:-false}
     expose:
       - "3010"
+    labels:
+      traefik.enable: "true"
+      traefik.http.middlewares.affine-https-redirect.redirectscheme.scheme: https
+      traefik.http.routers.affine-http.entryPoints: http
+      traefik.http.routers.affine-http.middlewares: affine-https-redirect
+      traefik.http.routers.affine-http.rule: Host(`docs.zacariahheim.com`) && PathPrefix(`/`)
+      traefik.http.routers.affine-http.service: affine-service
+      traefik.http.routers.affine-https.entryPoints: https
+      traefik.http.routers.affine-https.rule: Host(`docs.zacariahheim.com`) && PathPrefix(`/`)
+      traefik.http.routers.affine-https.service: affine-service
+      traefik.http.routers.affine-https.tls: "true"
+      traefik.http.routers.affine-https.tls.certresolver: letsencrypt
+      traefik.http.services.affine-service.loadbalancer.server.port: "3010"
     volumes:
       - type: bind
         source: ./storage/uploads

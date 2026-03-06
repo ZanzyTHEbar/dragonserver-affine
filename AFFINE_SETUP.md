@@ -21,8 +21,8 @@ Use [docker-compose.yaml](docker-compose.yaml) in this folder.
 Important Coolify-specific behavior:
 
 - The compose file is the single source of truth.
-- Only the `affine` service should get a public domain in Coolify.
-- Do not add manual Traefik labels.
+- Only the `affine` service should be publicly routed.
+- The compose includes the proxy labels for `docs.zacariahheim.com` directly because the current Coolify beta application flow did not attach them reliably for this stack.
 - `affine_migration` uses `exclude_from_hc: true` and `restart: "no"` because it exits successfully after running once.
 
 ## Required Environment Variables
